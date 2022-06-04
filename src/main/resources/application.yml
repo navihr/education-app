@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/educationdb
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+logging:
+  it:
+    naveen: TRACE
+educationapp:
+  corsconfig:
+    allowedorgin: '*'
+    allowedmethods: GET,POST,PUT,PATCH,DELETE,HEAD
+    allowedcredentials: false
+    maxage: 3600

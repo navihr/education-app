@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:educationdb
+    username: naveen
+    password: edu@123
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+logging:
+  level: warn
+  it:
+    naveen: TRACE
+educationapp:
+  corsconfig:
+    allowedorgin: '*'
+    allowedmethods: GET,POST,PUT,PATCH,DELETE,HEAD
+    allowedcredentials: false
+    maxage: 3600
