@@ -4,6 +4,7 @@ import it.naveen.educationapp.model.request.DepartmentRequest;
 import it.naveen.educationapp.model.request.InstitutionRequest;
 import it.naveen.educationapp.model.response.DepartmentResponse;
 import it.naveen.educationapp.service.impl.CreateDepartmentService;
+import it.naveen.educationapp.service.impl.DeleteDepartmentService;
 import it.naveen.educationapp.service.impl.ReadDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class DepartmentController {
     @Autowired
     private ReadDepartmentService readDepartmentService;
 
+    @Autowired
+    private DeleteDepartmentService deleteDepartmentService;
+
     @PostMapping
     public ResponseEntity<DepartmentResponse> createDepartment(@PathVariable Integer institutionId, @RequestBody DepartmentRequest departmentRequest) {
         InstitutionRequest institutionRequest = new InstitutionRequest();
@@ -35,6 +39,19 @@ public class DepartmentController {
         departmentRequest.setId(departmentId);
         departmentRequest.setInstitution(new InstitutionRequest().setId(institutionId));
         DepartmentResponse departmentResponse = readDepartmentService.process(departmentRequest);
-        return new ResponseEntity<>(departmentResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(departmentResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{departmentId}")
+    public ResponseEntity<DepartmentResponse> deleteDepartment(@PathVariable Integer institutionId, @PathVariable Integer departmentId) {
+        DepartmentRequest departmentRequest = new DepartmentRequest();
+        departmentRequest.setId(departmentId);
+        departmentRequest.setInstitution(new InstitutionRequest().setId(institutionId));
+        boolean isDeleted = deleteDepartmentService.process(departmentRequest);
+        if (isDeleted) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }

@@ -10,9 +10,10 @@ spring:
     console:
       enabled: true
 logging:
-  level: warn
-  it:
-    naveen: TRACE
+  level:
+    root: warn
+    it:
+      naveen: trace
 educationapp:
   corsconfig:
     allowedorgin: '*'

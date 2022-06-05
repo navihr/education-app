@@ -8,12 +8,33 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: update
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 logging:
-  it:
-    naveen: TRACE
+  level:
+    root: warn
+    it:
+      naveen: trace
 educationapp:
+  version: 1.0
   corsconfig:
     allowedorgin: '*'
     allowedmethods: GET,POST,PUT,PATCH,DELETE,HEAD
     allowedcredentials: false
     maxage: 3600
+  swagger:
+    enabled: true
+    title: Education App Api
+    description: Education App Api
+    useDefaultResponseMessages: false
+    enableUrlTemplating: false
+    deepLinking: true
+    defaultModelsExpandDepth: 1
+    defaultModelExpandDepth: 1
+    displayOperationId: false
+    displayRequestDuration: false
+    filter: false
+    maxDisplayedTags: 0
+    showExtensions: false
+

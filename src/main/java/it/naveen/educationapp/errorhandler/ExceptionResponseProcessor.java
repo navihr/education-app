@@ -3,6 +3,8 @@ package it.naveen.educationapp.errorhandler;
 import it.naveen.educationapp.model.common.Error;
 import it.naveen.educationapp.model.common.ErrorResponse;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,9 +21,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ExceptionResponseProcessor extends ResponseEntityExceptionHandler {
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @ExceptionHandler({NotFoundException.class, IllegalArgumentException.class})
     public final ResponseEntity<ErrorResponse> handleExceptionInternal(Exception ex, WebRequest request) {
-        logger.debug("Start IbExceptionResponseProcessor -> handleExceptionInternal method");
+        logger.debug("Start ExceptionResponseProcessor -> handleExceptionInternal method");
+        logger.error("Throw exception", ex);
         ErrorResponse errorHandlerResponse = new ErrorResponse();
         HttpStatus status = null;
         if (ex instanceof MethodArgumentNotValidException || ex instanceof IllegalArgumentException) {
